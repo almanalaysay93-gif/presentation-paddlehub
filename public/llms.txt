@@ -1,0 +1,14 @@
+# PaddleBase & PaddleBase Owner
+
+> The unified operating system for Southeast Asian racket sports.
+
+PaddleBase connects recreational and competitive pickleball players, facility operators, coaches, and tournament referees through a single high-performance software ecosystem.
+
+## Core Surfaces
+- [Player Discovery & Court Booking](https://paddlebase.org/courts): Browse verified courts in Davao City, Digos, Matanao, Bansalan, and Santa Cruz with daytime and nighttime pricing.
+- [Interactive Venue Map](https://paddlebase.org/map): OpenStreetMap GPS navigation to every active venue.
+- [3D Interactive Presentation Deck](https://paddlebase.org/deck): Spatial investor and guest pitch deck with explainer videos and unit economics.
+- [PaddleClub Live Queue](https://paddlebase.org/paddleclub): On-court TV display boards and fair paddle rotation engine.
+- [Coaches Directory](https://paddlebase.org/coaches): Verified instructor directory with hourly booking and direct payouts.
+- [Community Marketplace](https://paddlebase.org/marketplace): Player equipment trading with verified local pickup.
+- [Venue Point-of-Sale (POS)](https://paddlebaseowner.org): Automated court operations, cash and GCash reconciliation, and dynamic slot pricing for venue owners.
