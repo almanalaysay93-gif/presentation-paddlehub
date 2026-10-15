@@ -228,6 +228,15 @@ export default function Deck() {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
+  // Raw mousemove fires far more often than the screen repaints. Without
+  // this, every event called setMousePos, which re-rendered and reapplied
+  // the rotateX/rotateY transform on the div wrapping the slide's autoplay
+  // video, forcing the browser to recomposite that layer dozens of times a
+  // second -- that fight with video decode on the main thread was the lag.
+  // Collapsing to one scheduled update per animation frame caps it at the
+  // screen's own repaint rate.
+  const pendingPos = useRef({ x: 0, y: 0 });
+  const rafId = useRef<number | null>(null);
 
   const currentSlide = DECK_SLIDES[activeSlide];
 
@@ -236,15 +245,31 @@ export default function Deck() {
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (prefersReducedMotion) return;
       const rect = e.currentTarget.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-      setMousePos({ x, y });
+      pendingPos.current = {
+        x: ((e.clientX - rect.left) / rect.width - 0.5) * 2,
+        y: ((e.clientY - rect.top) / rect.height - 0.5) * 2,
+      };
+      if (rafId.current !== null) return;
+      rafId.current = requestAnimationFrame(() => {
+        rafId.current = null;
+        setMousePos(pendingPos.current);
+      });
     },
     [prefersReducedMotion]
   );
 
   const handleMouseLeave = useCallback(() => {
+    if (rafId.current !== null) {
+      cancelAnimationFrame(rafId.current);
+      rafId.current = null;
+    }
     setMousePos({ x: 0, y: 0 });
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (rafId.current !== null) cancelAnimationFrame(rafId.current);
+    };
   }, []);
 
   const nextSlide = useCallback(() => {
@@ -609,6 +634,22 @@ export default function Deck() {
                 {/* Ambient Looping Explainer Video */}
                 <video
                   key={currentSlide.videoSrc}
+                  ref={(el) => {
+                    // React applies `muted` as a DOM property, not an HTML
+                    // attribute. Chromium's autoplay-without-gesture gate
+                    // can evaluate the element before that property lands,
+                    // sees an unmuted video, and silently refuses to
+                    // autoplay it for good -- it never retries once
+                    // blocked. The video then sits frozen on its poster
+                    // forever, which reads as "lagging" rather than stuck.
+                    // Setting `.muted` here and calling `.play()`
+                    // ourselves sidesteps the race instead of trusting the
+                    // `autoPlay` attribute.
+                    if (el) {
+                      el.muted = true;
+                      el.play().catch(() => {});
+                    }
+                  }}
                   src={currentSlide.videoSrc}
                   poster={currentSlide.thumbnail}
                   autoPlay
