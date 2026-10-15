@@ -35,6 +35,8 @@ interface DeckSlide {
   badgeColor: string;
 }
 
+const BASE_PATH = import.meta.env.BASE_URL;
+
 const DECK_SLIDES: DeckSlide[] = [
   {
     id: "overview",
@@ -44,7 +46,7 @@ const DECK_SLIDES: DeckSlide[] = [
     subtitle:
       "PaddleBase connects players, facility operators, coaches, and tournaments through a single high-performance infrastructure.",
     videoId: "1knz20cdNAW5UvPzKtapRa6Hod1FR-1fD",
-    videoSrc: "/video/deck/how_it_works.mp4",
+    videoSrc: `${BASE_PATH}video/deck/how_it_works.mp4`,
     thumbnail: "https://lh3.googleusercontent.com/d/1dZvq_r72Nbu2ORMj0KSEDkXdU1rg1avE",
     videoDuration: "1:45",
     bullets: [
@@ -69,7 +71,7 @@ const DECK_SLIDES: DeckSlide[] = [
     subtitle:
       "Zero forced account walls, verified venue pricing, GPS routing, and instant digital QR passes on your mobile device.",
     videoId: "1wjDbD3IBHmTOl2vmkDDQ9RTogiIp-TEk",
-    videoSrc: "/video/deck/players.mp4",
+    videoSrc: `${BASE_PATH}video/deck/players.mp4`,
     thumbnail: "https://lh3.googleusercontent.com/d/1uGD9LcW0SHg1k6MlMLvS3POP0owIZdxs",
     videoDuration: "2:10",
     bullets: [
@@ -94,7 +96,7 @@ const DECK_SLIDES: DeckSlide[] = [
     subtitle:
       "Replaces paper logbooks with automated booking grids, cash auditing, staff shift control, and dynamic rate rules.",
     videoId: "1mZtaysB3W0Ax-rl6qwTH3iOoBlKLAq-7",
-    videoSrc: "/video/deck/owners.mp4",
+    videoSrc: `${BASE_PATH}video/deck/owners.mp4`,
     thumbnail: "https://lh3.googleusercontent.com/d/1iwIdM9ToNdtPvIMv0td3dZ7uXWL_5gWi",
     videoDuration: "2:30",
     bullets: [
@@ -119,7 +121,7 @@ const DECK_SLIDES: DeckSlide[] = [
     subtitle:
       "Digital court boards designed for ten-foot readability on facility TVs, paired with mobile paddle queue rotations.",
     videoId: "1-bg3wWQH8IexmWJUl_VYBqBqacQdMr7s",
-    videoSrc: "/video/deck/queue.mp4",
+    videoSrc: `${BASE_PATH}video/deck/queue.mp4`,
     thumbnail: "https://lh3.googleusercontent.com/d/1hr8ThmQzo-uGjH03xBPMUEre_u1G8Z2N",
     videoDuration: "1:55",
     bullets: [
@@ -144,7 +146,7 @@ const DECK_SLIDES: DeckSlide[] = [
     subtitle:
       "Independent coaches and certified referees manage calendar availability, accept student bookings, and receive direct payouts.",
     videoId: "1zFpKt4ZucZBzL08yzlvg9av1sFN6q0H5",
-    videoSrc: "/video/deck/coaches.mp4",
+    videoSrc: `${BASE_PATH}video/deck/coaches.mp4`,
     thumbnail: "https://lh3.googleusercontent.com/d/1yI64wVWD8ZaSo00jeNWKMaW1sOBXcOHD",
     videoDuration: "1:40",
     bullets: [
@@ -169,7 +171,7 @@ const DECK_SLIDES: DeckSlide[] = [
     subtitle:
       "A localized network for player discussions, club announcements, tournament brackets, and verified equipment trading.",
     videoId: "18IlVM6fYhlENVp-wA3mPTQOZ4GF4I5dF",
-    videoSrc: "/video/deck/feed.mp4",
+    videoSrc: `${BASE_PATH}video/deck/feed.mp4`,
     thumbnail: "https://lh3.googleusercontent.com/d/14LF_Sb_w3EycH5heJCgq4AmVOuNu11Ir",
     videoDuration: "2:05",
     bullets: [
@@ -194,7 +196,7 @@ const DECK_SLIDES: DeckSlide[] = [
     subtitle:
       "High-margin software subscriptions combined with recurring consumer transaction fees across the fastest growing racket sport in Asia.",
     videoId: "1knz20cdNAW5UvPzKtapRa6Hod1FR-1fD",
-    videoSrc: "/video/deck/how_it_works.mp4",
+    videoSrc: `${BASE_PATH}video/deck/how_it_works.mp4`,
     thumbnail: "https://lh3.googleusercontent.com/d/1dZvq_r72Nbu2ORMj0KSEDkXdU1rg1avE",
     videoDuration: "1:45",
     bullets: [
